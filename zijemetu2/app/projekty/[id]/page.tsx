@@ -114,7 +114,7 @@ export default function ProjectDetailPage() {
       setUserVotes(p => { const s = new Set(p); s.delete(project.id); return s })
       setVotes(p => ({ ...p, [project.id]: Math.max(0, (p[project.id] || 1) - 1) }))
     } else {
-      setUserVotes(p => new Set([...p, project.id]))
+      setUserVotes(p => new Set([...Array.from(p), project.id]))
       setVotes(p => ({ ...p, [project.id]: (p[project.id] || 0) + 1 }))
     }
   }
