@@ -37,8 +37,22 @@ export default function AuthModal({ isOpen, onClose }: Props) {
         padding: '44px 36px', width: '100%', maxWidth: 400,
         boxShadow: '0 16px 60px rgba(0,0,0,0.25)', border: '1px solid var(--border)',
       }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontSize: 36, marginBottom: 12 }}>🦋</div>
+        <div style={{ textAlign: 'center', marginBottom: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <img
+            src="/logo.png"
+            alt="Žijeme TU! logo"
+            style={{
+              height: 120,
+              width: 120,
+              objectFit: 'contain',
+              marginBottom: 16,
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 4px 12px rgba(0,0,0,0.15))',
+            }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          />
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginBottom: 6 }}>
             {mode === 'login' ? 'Přihlásit se' : 'Registrovat se'}
           </h2>

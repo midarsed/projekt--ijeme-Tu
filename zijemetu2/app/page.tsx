@@ -5,31 +5,47 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section style={{ background: 'var(--black)', padding: '72px 0 48px', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: 'var(--black)', padding: '48px 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 48, flexWrap: 'wrap' }}>
 
-            {/* Badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, border: '1px solid rgba(255,255,255,0.15)', padding: '6px 14px', borderRadius: 2, marginTop: 0, marginBottom: 12 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.86)' }}>
-                Sdružení nezávislých kandidátek · Strážnice
-              </span>
-            </div>
+            {/* Levý sloupec: textová část */}
+            <div style={{ flex: 1, minWidth: 280, maxWidth: 520 }}>
+              {/* Badge */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, border: '1px solid rgba(255,255,255,0.15)', padding: '6px 14px', borderRadius: 2, marginTop: 0, marginBottom: 12 }}>
+                <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.86)' }}>
+                  Sdružení nezávislých kandidátek · Strážnice
+                </span>
+              </div>
 
-            {/* Nadpis + logo vedle sebe */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32, marginBottom: 12, flexWrap: 'wrap', width: '100%' }}>
+              {/* Nadpis */}
               <h1 style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(38px, 5.5vw, 58px)',
                 fontWeight: 700, color: 'var(--white)',
                 lineHeight: 1, letterSpacing: '-0.02em',
-                whiteSpace: 'nowrap',
+                marginBottom: 12,
               }}>
                 Žijeme <span style={{ textTransform: 'uppercase', fontWeight: 700 }}>TU!</span>
               </h1>
 
-              {/* Logo vedle nadpisu */}
+              <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.92)', lineHeight: 1.8, marginTop: 0, marginBottom: 20 }}>
+                Hlasujte o projektech, které považujete za nejdůležitější pro Strážnici. Váš hlas přímo ovlivňuje naše priority.
+              </p>
+
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 0 }}>
+                <Link href="/projekty" style={{ padding: '14px 32px', background: 'var(--white)', color: 'var(--black)', borderRadius: 'var(--radius)', fontWeight: 500, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none' }}>
+                  Hlasovat o projektech
+                </Link>
+                <Link href="/o-nas" style={{ padding: '14px 32px', background: 'transparent', color: 'rgba(255,255,255,0.92)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: 'var(--radius)', fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none' }}>
+                  Poznat kandidátky
+                </Link>
+              </div>
+            </div>
+
+            {/* Pravý sloupec: logo */}
+            <div style={{ flexShrink: 0 }}>
               <img
                 src="/logo.png"
                 alt="Žijeme TU! logo"
@@ -38,9 +54,6 @@ export default function HomePage() {
                   width: 360,
                   objectFit: 'contain',
                   opacity: 1,
-                  flexShrink: 0,
-                  marginLeft: 'auto',
-                  marginTop: 0,
                   filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))',
                   transform: 'translateZ(0)',
                 }}
@@ -48,18 +61,6 @@ export default function HomePage() {
               />
             </div>
 
-            <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.92)', lineHeight: 1.8, marginTop: 0, marginBottom: 20, maxWidth: 480 }}>
-              Hlasujte o projektech, které považujete za nejdůležitější pro Strážnici. Váš hlas přímo ovlivňuje naše priority.
-            </p>
-
-            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 0 }}>
-              <Link href="/projekty" style={{ padding: '14px 32px', background: 'var(--white)', color: 'var(--black)', borderRadius: 'var(--radius)', fontWeight: 500, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none' }}>
-                Hlasovat o projektech
-              </Link>
-              <Link href="/o-nas" style={{ padding: '14px 32px', background: 'transparent', color: 'rgba(255,255,255,0.92)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: 'var(--radius)', fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none' }}>
-                Poznat kandidátky
-              </Link>
-            </div>
           </div>
         </div>
       </section>
@@ -79,6 +80,41 @@ export default function HomePage() {
                 <div style={{ fontSize: 12, color: 'var(--gray)' }}>{s.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* UVÍTACÍ TEXT */}
+      <section style={{ background: 'var(--white)', padding: '72px 0' }}>
+        <div className="container">
+          <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+            <div style={{ fontSize: 14, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gray)', marginBottom: 24 }}>Vítejte</div>
+            <h2 style={{ 
+              fontFamily: 'var(--font-display)', 
+              fontSize: 32, 
+              fontWeight: 600, 
+              color: 'var(--black)', 
+              marginBottom: 32,
+              lineHeight: 1.2
+            }}>
+              Vítáme vás, STRÁŽNIČANY, na našich stránkách ☺️
+            </h2>
+            <div style={{ 
+              fontSize: 17, 
+              lineHeight: 1.8, 
+              color: 'var(--gray-dark)',
+              marginBottom: 32
+            }}>
+              <p style={{ marginBottom: 20 }}>
+                Rády bychom se představily - jsme ženy ze Strážnice, které chtějí otevřeně a férově pracovat pro město - plánovat jeho rozvoj, pečovat o majetek, chránit historii, podporovat sport a zapojit občany do rozhodování.
+              </p>
+              <p style={{ marginBottom: 20 }}>
+                Postupně budeme přidávat obsah, který poskytne náhled naší vize, kterou bychom vám chtěly v letošních komunálních volbách nabídnout.
+              </p>
+              <p>
+                A proč zrovna my, ženy? Protože stejně jako jen žena dokáže z obydlí vytvořit domov, tak věříme že můžeme i my město proměnit ve fungující a vzkvétající celek 🫶.
+              </p>
+            </div>
           </div>
         </div>
       </section>
