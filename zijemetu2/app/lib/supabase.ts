@@ -15,6 +15,13 @@ export type Project = {
   image_url?: string
   photo_url?: string
   order_num: number
+  voting_ends_at?: string | null
+  created_at: string
+  video_url?: string | null
+  images?: string[]
+  votable?: boolean
+  comparisonGroups?: any[]
+  comparisonTextImage?: string
 }
 
 export type Vote = {

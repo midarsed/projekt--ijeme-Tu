@@ -19,6 +19,7 @@ const staticProjects = [
     created_at: new Date().toISOString(),
     image_url: 'https://picsum.photos/seed/tenis-kurty-straznice/400/300.jpg',
     video_url: 'https://www.facebook.com/61586332845379/videos/pcb.122111354013211094/877624205106538',
+    order_num: 1,
     images: [
       '/projekty/hlavní.jpg',
       '/projekty/vedlejsi-potom-ostre-2.png',
@@ -35,6 +36,7 @@ const staticProjects = [
     created_at: new Date().toISOString(),
     image_url: 'https://picsum.photos/seed/brana-straznice/400/300.jpg',
     video_url: null,
+    order_num: 2,
     images: [
       '/projekty/hlavní-brána.jpg',
       '/projekty/vedlejší-brána.jpg'
@@ -50,6 +52,7 @@ const staticProjects = [
     created_at: new Date().toISOString(),
     image_url: 'https://picsum.photos/seed/hriste-srovnani-detail/400/300.jpg',
     video_url: null,
+    order_num: 3,
     votable: false,
     images: [
       '/projekty/srovnani-nase-uprkova.png',
