@@ -4,15 +4,23 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
-export const supabase = createClient(supabaseUrl, supabaseServiceKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export type Project = {
   id: string
   title: string
   description: string
-  cost?: string
-  category?: string
-  voting_ends_at?: string
+  category: string
+  cost: string
+  image_url?: string
+  photo_url?: string
+  order_num: number
+}
+
+export type Vote = {
+  id: string
+  project_id: string
+  user_id: string
   created_at: string
 }
 

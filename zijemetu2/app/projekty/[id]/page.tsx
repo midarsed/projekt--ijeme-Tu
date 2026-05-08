@@ -96,26 +96,140 @@ export default function ProjectDetailPage() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   useEffect(() => {
-    const foundProject = staticProjects.find(p => p.id === projectId)
-    if (foundProject) {
+    async function loadVotes() {
+      const foundProject = staticProjects.find(p => p.id === projectId)
+      if (!foundProject) {
+        setLoading(false)
+        return
+      }
+      
       setProject(foundProject)
-      setVotes({ [projectId]: 0 })
-      setUserVotes(new Set())
+      
+      try {
+        // Načtení všech hlasů pro projekt
+        const { data: allVotes, error } = await supabase
+          .from('votes')
+          .select('*')
+          .eq('project_id', projectId)
+        
+        if (error) {
+          console.log('Chyba při načítání hlasů:', error)
+          // Fallback na lokální stav
+          setVotes({ [projectId]: 0 })
+          setUserVotes(new Set())
+        } else {
+          // Nastavení počtu hlasů
+          setVotes({ [projectId]: allVotes?.length || 0 })
+          
+          // Načtení hlasů přihlášeného uživatele
+          if (user) {
+            const { data: userVotes } = await supabase
+              .from('votes')
+              .select('*')
+              .eq('project_id', projectId)
+              .eq('user_id', user.id)
+            
+            if (userVotes && userVotes.length > 0) {
+              setUserVotes(new Set([projectId]))
+            } else {
+              setUserVotes(new Set())
+            }
+          } else {
+            setUserVotes(new Set())
+          }
+        }
+      } catch (err) {
+        console.log('Chyba:', err)
+        // Fallback na lokální stav
+        setVotes({ [projectId]: 0 })
+        setUserVotes(new Set())
+      }
+      
+      setLoading(false)
     }
-    setLoading(false)
-  }, [projectId])
+    
+    loadVotes()
+  }, [projectId, user])
 
   async function handleVote() {
     if (!user) { setAuthOpen(true); return }
     if (!project) return
     
     const voted = userVotes.has(project.id)
-    if (voted) {
-      setUserVotes(p => { const s = new Set(p); s.delete(project.id); return s })
-      setVotes(p => ({ ...p, [project.id]: Math.max(0, (p[project.id] || 1) - 1) }))
-    } else {
-      setUserVotes(p => new Set([...Array.from(p), project.id]))
-      setVotes(p => ({ ...p, [project.id]: (p[project.id] || 0) + 1 }))
+    console.log('=== HANDLEVOTE START ===')
+    console.log('User:', user)
+    console.log('Project:', project)
+    console.log('Voted:', voted)
+    console.log('Current votes:', votes)
+    
+    try {
+      if (voted) {
+        // Smazání hlasu
+        console.log('MAZÁNÍ HLASU')
+        const { error, data } = await supabase
+          .from('votes')
+          .delete()
+          .eq('project_id', project.id)
+          .eq('user_id', user.id)
+          .select()
+        
+        console.log('Výsledek mazání:', { error, data })
+        
+        if (error) {
+          console.error('Chyba při mazání hlasu:', error)
+          alert(`Chyba při mazání hlasu: ${error.message}`)
+          return
+        }
+        
+        // Aktualizace UI
+        const newVotes = { ...votes, [project.id]: Math.max(0, (votes[project.id] || 1) - 1) }
+        console.log('Nové hlasy po smazání:', newVotes)
+        setVotes(newVotes)
+        setUserVotes(p => { const s = new Set(p); s.delete(project.id); return s })
+      } else {
+        // Přidání hlasu
+        console.log('PŘIDÁVÁNÍ HLASU')
+        const { error, data } = await supabase
+          .from('votes')
+          .insert({
+            project_id: project.id,
+            user_id: user.id
+          })
+          .select()
+        
+        console.log('Výsledek přidávání:', { error, data })
+        
+        if (error) {
+          console.error('Chyba při přidávání hlasu:', error)
+          alert(`Chyba při přidávání hlasu: ${error.message}`)
+          return
+        }
+        
+        // Aktualizace UI
+        const newVotes = { ...votes, [project.id]: (votes[project.id] || 0) + 1 }
+        console.log('Nové hlasy po přidání:', newVotes)
+        setVotes(newVotes)
+        setUserVotes(p => new Set([...Array.from(p), project.id]))
+      }
+      
+      // Znovu načtení hlasů z databáze pro ověření
+      setTimeout(async () => {
+        console.log('KONTROLNÍ NAČTENÍ HLASŮ')
+        const { data: allVotes, error: checkError } = await supabase
+          .from('votes')
+          .select('*')
+          .eq('project_id', project.id)
+        
+        console.log('Kontrolní výsledek:', { allVotes, checkError, count: allVotes?.length })
+        
+        if (!checkError) {
+          setVotes({ [project.id]: allVotes?.length || 0 })
+        }
+      }, 1000)
+      
+    } catch (err) {
+      console.error('Neočekaná chyba:', err)
+      alert(`Neočekaná chyba: ${err instanceof Error ? err.message : 'Neznámá chyba'}`)
     }
   }
 

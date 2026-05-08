@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer style={{ background: 'var(--black)', color: 'var(--white)', padding: '52px 0 28px', marginTop: 96 }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 40, marginBottom: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 40, marginBottom: 48 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <img src="/logo.jpg" alt="Žijeme TU!"

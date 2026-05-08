@@ -47,7 +47,7 @@ export default async function ONasPage() {
         <div className="container">
           <div style={{ marginBottom: 48 }}>
             <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gray)', marginBottom: 10 }}>Kandidátky</div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 40, fontWeight: 600 }}>Náš tým – {candidates.length} žen</h2>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 40, fontWeight: 600 }}>Náš tým žen</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 2 }}>
             {candidates.map(c => (

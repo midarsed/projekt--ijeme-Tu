@@ -7,11 +7,11 @@ export default function HomePage() {
       {/* HERO */}
       <section style={{ background: 'var(--black)', padding: '48px 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 48, flexWrap: 'wrap' }}>
 
             {/* Levý sloupec: textová část */}
-            <div style={{ flex: 1, minWidth: 280, maxWidth: 520 }}>
+            <div style={{ flex: 1, minWidth: 280, maxWidth: 520, order: 1 }}>
               {/* Badge */}
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, border: '1px solid rgba(255,255,255,0.15)', padding: '6px 14px', borderRadius: 2, marginTop: 0, marginBottom: 12 }}>
                 <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.86)' }}>
@@ -45,7 +45,7 @@ export default function HomePage() {
             </div>
 
             {/* Pravý sloupec: logo */}
-            <div style={{ flexShrink: 0 }}>
+            <div style={{ flexShrink: 0, order: 2 }}>
               <img
                 src="/logo.png"
                 alt="Žijeme TU! logo"
@@ -71,7 +71,7 @@ export default function HomePage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 0 }}>
             {[
               { num: '5 300', label: 'obyvatel Strážnice' },
-              { num: '9+', label: 'nezávislých kandidátek' },
+              { num: '21+', label: 'nezávislých kandidátek' },
               { num: '4', label: 'aktivní projekty' },
               { num: '100%', label: 'bez stranické příslušnosti' },
             ].map((s, i) => (
