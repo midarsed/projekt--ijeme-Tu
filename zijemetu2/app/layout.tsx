@@ -3,6 +3,7 @@ import './globals.css'
 import { AuthProvider } from './lib/auth-context'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: 'Žijeme tu! – Strážnice',
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <Analytics />
         </AuthProvider>
       </body>
     </html>
