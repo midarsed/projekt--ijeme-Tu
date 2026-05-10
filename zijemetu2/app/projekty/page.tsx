@@ -50,6 +50,22 @@ const staticProjects = [
       '/projekty/srovnani-nase-orechovka.png',
       '/projekty/srovnani-nase-kovarska.png'
     ]
+  },
+  {
+    id: '4',
+    title: 'HŘIŠTĚ A SPORTOVIŠTĚ',
+    description: 'Naší představou je kultivovaný veřejný prostor s promyšlenou strukturou, přírodními herními prvky, možností pohybu po bezpečném povrchu i možnost klidového pobytu v zeleni. 🌿Návrh zároveň pracuje s diferenciací řešení – je zde ukázka jak přírodního hřiště, tak i modernějšího pojetí s různými prvky povrchů i využití, aby bylo možné zvolit nejvhodnější řešení pro dané místo. Cílem je funkční a přehledné místo pro všechny generace, které bude přirozeně začleněno do okolí a dlouhodobě udržitelné. Nejde o velká hřiště, ale o příjemné místo pro děti, rodiče i seniory, kde se dá hrát, odpočívat i potkávat.',
+    category: 'Sportovní vybavení',
+    cost: 'K určení',
+    voting_ends_at: null,
+    created_at: new Date().toISOString(),
+    image_url: 'https://picsum.photos/seed/hriste-sportoviste/400/300.jpg',
+    video_url: null,
+    images: [
+      '/projekty/projekty2/hřiště a sportoviště vedlejší1.jpg',
+      '/projekty/projekty2/hřiště a sportoviště vedlejší2.jpg',
+      '/projekty/projekty2/hřiště a sportoviště vedlejší3.jpg'
+    ]
   }
 ]
 
