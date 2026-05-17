@@ -39,7 +39,7 @@ export default function AuthModal({ isOpen, onClose }: Props) {
       }}>
         <div style={{ textAlign: 'center', marginBottom: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <img
-            src="/logo.png"
+            src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
             style={{
               height: 120,

@@ -30,7 +30,7 @@ export default function KontaktPage() {
           <div style={{ maxWidth: 560 }}>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.88)', marginBottom: 10 }}>Kontakt</div>
             <h1 style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: 'Segoe UI Semibold, var(--font-display)',
               fontSize: 44,
               fontWeight: 600,
               marginBottom: 12,
@@ -43,9 +43,9 @@ export default function KontaktPage() {
             }}>Máte dotaz, nápad nebo chcete spolupracovat?</p>
           </div>
           <img
-            src="/logo.png"
+            src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
-            style={{ height: 360, width: 360, objectFit: 'contain', marginLeft: 'auto', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
+            style={{ height: 360, width: 360, objectFit: 'contain', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
           />
         </div>
@@ -55,7 +55,7 @@ export default function KontaktPage() {
         <div className="container" style={{ padding: '56px 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 64, maxWidth: 900, margin: '0 auto' }}>
           <div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginBottom: 32 }}>Kontaktní údaje</h2>
+            <h2 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 26, marginBottom: 32 }}>Kontaktní údaje</h2>
             {[
               { icon: '✉️', label: 'Email', value: 'zijemetu@email.cz', href: 'mailto:zijemetu@email.cz' },
               { icon: '📍', label: 'Město', value: 'Strážnice, okres Hodonín', href: undefined },
@@ -80,11 +80,11 @@ export default function KontaktPage() {
           </div>
 
           <div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, marginBottom: 32 }}>Kontaktní formulář</h2>
+            <h2 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 26, marginBottom: 32 }}>Kontaktní formulář</h2>
             {status === 'sent' ? (
               <div style={{ padding: '36px', border: '1px solid var(--border)', borderLeft: '3px solid var(--black)', textAlign: 'center' }}>
                 <div style={{ fontSize: 32, marginBottom: 12 }}>✓</div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, marginBottom: 6 }}>Odesláno!</h3>
+                <h3 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 22, marginBottom: 6 }}>Odesláno!</h3>
                 <p style={{ color: 'var(--gray)', fontSize: 14 }}>Odpovíme vám co nejdříve.</p>
               </div>
             ) : (

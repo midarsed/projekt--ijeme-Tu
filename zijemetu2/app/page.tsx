@@ -21,7 +21,7 @@ export default function HomePage() {
 
               {/* Nadpis */}
               <h1 style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: 'Segoe UI Semibold, var(--font-display)',
                 fontSize: 'clamp(38px, 5.5vw, 58px)',
                 fontWeight: 700, color: 'var(--white)',
                 lineHeight: 1, letterSpacing: '-0.02em',
@@ -47,7 +47,7 @@ export default function HomePage() {
             {/* Pravý sloupec: logo */}
             <div style={{ flexShrink: 0, order: 2 }}>
               <img
-                src="/logo.png"
+                src="/LOGO_kulate.png"
                 alt="Žijeme TU! logo"
                 style={{
                   height: 360,
@@ -119,6 +119,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* TRANSPARENCY SQUARES */}
+      <section style={{ padding: '60px 0', borderBottom: '1px solid var(--border)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 2 }}>
+            {[
+              { icon: '🌱', title: 'Nezávislost', text: 'Nestojíme za žádnou politickou stranou. Rozhodujeme podle potřeb obyvatel Strážnice.' },
+              { icon: '🤝', title: 'Komunita', text: 'Věříme v sílu komunity. Chceme, aby obyvatelé Strážnice měli skutečný vliv.' },
+              { icon: '🏛️', title: 'Transparentnost', text: 'Otevřené hospodaření a jasná komunikace s občany jsou naší prioritou.' },
+            ].map(v => (
+              <div key={v.title} style={{ padding: '40px 28px', border: '1px solid var(--border)' }}>
+                <div style={{ fontSize: 28, marginBottom: 16 }}>{v.icon}</div>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600, marginBottom: 10 }}>{v.title}</h3>
+                <p style={{ fontSize: 13, color: 'var(--gray-dark)', fontWeight: 500, lineHeight: 1.75 }}>{v.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FEATURES */}
       <section style={{ padding: '88px 0' }}>
         <div className="container">
@@ -129,7 +148,7 @@ export default function HomePage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 2 }}>
             {[
               { icon: '🗳️', title: 'Hlasování o projektech', desc: 'Zaregistrujte se emailem a rozhodněte, které projekty jsou pro naše město nejdůležitější.', href: '/projekty' },
-              { icon: '📱', title: 'Aktivity a videa', desc: 'Přehled toho, co děláme. Příspěvky a videa z Facebooku na jednom místě.', href: '/facebook' },
+              { icon: '📱', title: 'Volební program', desc: 'Přehled toho, co děláme. Příspěvky a videa z Facebooku na jednom místě.', href: '/facebook' },
               { icon: '👩‍👩‍👧', title: 'Naše kandidátky', desc: 'Jsme ženy ze Strážnice. Poznáte nás lépe v sekci O nás.', href: '/o-nas' },
               { icon: '✉️', title: 'Kontakt', desc: 'Máte nápad nebo dotaz? Napište nám přímo nebo přes Facebook.', href: '/kontakt' },
             ].map(f => (

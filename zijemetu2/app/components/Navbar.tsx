@@ -44,7 +44,7 @@ export default function Navbar() {
 
           {/* Desktop nav - střed, skryté na mobilu */}
           <div className="nav-desktop hidden md:flex" style={{ display: 'flex', gap: 32, alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-            {[['/', 'Úvod'], ['/projekty', 'Projekty'], ['/facebook', 'Aktivity'], ['/o-nas', 'O nás'], ['/kontakt', 'Kontakt']].map(([href, label]) => (
+            {[['/', 'O nás'], ['/facebook', 'Volební program'], ['/projekty', 'Projekty'], ['/o-nas', 'Kandidátka'], ['/potkejme-se', 'Potkejme se'], ['/kontakt', 'Kontakt']].map(([href, label]) => (
               <Link key={href} href={href} style={{
                 fontSize: 14, fontWeight: 700, color: 'black',
                 letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none',
@@ -138,10 +138,11 @@ export default function Navbar() {
               {/* Odkazy v sidebaru */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 0, marginBottom: 16 }}>
                 {[
-                  { href: '/', label: 'Úvod' },
+                  { href: '/', label: 'O nás' },
+                  { href: '/facebook', label: 'Volební program' },
                   { href: '/projekty', label: 'Projekty' },
-                  { href: '/facebook', label: 'Aktivity' },
-                  { href: '/o-nas', label: 'O nás' },
+                  { href: '/o-nas', label: 'Kandidátka' },
+                  { href: '/potkejme-se', label: 'Potkejme se' },
                   { href: '/kontakt', label: 'Kontakt' },
                 ].map(({ href, label }) => (
                   <Link 

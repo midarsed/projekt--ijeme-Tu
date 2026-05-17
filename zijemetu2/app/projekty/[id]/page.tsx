@@ -354,7 +354,7 @@ export default function ProjectDetailPage() {
             </p>
           </div>
           <img
-            src="/logo.png"
+            src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
             style={{ height: 360, width: 360, objectFit: 'contain', marginLeft: 'auto', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}

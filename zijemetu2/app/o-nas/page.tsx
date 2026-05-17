@@ -14,40 +14,22 @@ export default async function ONasPage() {
         <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
           <div style={{ maxWidth: 560 }}>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.84)', marginBottom: 10 }}>Poznejte nás</div>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 52, fontWeight: 700, color: 'var(--white)', marginBottom: 16 }}>O nás</h1>
+            <h1 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 52, fontWeight: 700, color: 'var(--white)', marginBottom: 16, lineHeight: 1, letterSpacing: '-0.02em' }}>Kandidátka</h1>
             <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, maxWidth: 520, lineHeight: 1.8 }}>Jsme ženy ze Strážnice, kterým záleží na tom, aby zde bylo příjemně žít pro všechny generace.</p>
           </div>
           <img
-            src="/logo.png"
+            src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
-            style={{ height: 360, width: 360, objectFit: 'contain', marginLeft: 'auto', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
+            style={{ height: 360, width: 360, objectFit: 'contain', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
           />
         </div>
       </div>
-
-      <section style={{ padding: '60px 0', borderBottom: '1px solid var(--border)' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 2 }}>
-            {[
-              { icon: '🌱', title: 'Nezávislost', text: 'Nestojíme za žádnou politickou stranou. Rozhodujeme podle potřeb obyvatel Strážnice.' },
-              { icon: '🤝', title: 'Komunita', text: 'Věříme v sílu komunity. Chceme, aby obyvatelé Strážnice měli skutečný vliv.' },
-              { icon: '🏛️', title: 'Transparentnost', text: 'Otevřené hospodaření a jasná komunikace s občany jsou naší prioritou.' },
-            ].map(v => (
-              <div key={v.title} style={{ padding: '40px 28px', border: '1px solid var(--border)' }}>
-                <div style={{ fontSize: 28, marginBottom: 16 }}>{v.icon}</div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600, marginBottom: 10 }}>{v.title}</h3>
-                <p style={{ fontSize: 13, color: 'var(--gray-dark)', fontWeight: 500, lineHeight: 1.75 }}>{v.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section style={{ padding: '72px 0' }}>
         <div className="container">
           <div style={{ marginBottom: 48 }}>
             <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gray)', marginBottom: 10 }}>Kandidátky</div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 40, fontWeight: 600 }}>Náš tým žen</h2>
+            <h2 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 40, fontWeight: 600 }}>Náš tým žen</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 2 }}>
             {candidates.map(c => (
@@ -65,7 +47,7 @@ export default async function ONasPage() {
                   </div>
                 </div>
                 <div style={{ padding: '18px 20px 22px' }}>
-                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 600, marginBottom: 3 }}>{c.name}</h3>
+                  <h3 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 18, fontWeight: 600, marginBottom: 3 }}>{c.name}</h3>
                   {c.role && <p style={{ fontSize: 10, color: 'var(--gray)', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>{c.role}</p>}
                   {c.bio && <p style={{ fontSize: 13, color: 'var(--gray-dark)', lineHeight: 1.65 }}>{c.bio}</p>}
                 </div>

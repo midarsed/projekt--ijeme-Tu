@@ -137,13 +137,13 @@ export default function ProjektyPage() {
         <div className="container" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
           <div style={{ maxWidth: 560 }}>
             <h1 style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: 'Segoe UI Semibold, var(--font-display)',
               fontSize: 48,
               fontWeight: 600,
               marginBottom: 16,
               color: 'var(--white)'
             }}>
-              Projekty
+              Projekty a vize
             </h1>
             <p style={{
               color: 'rgba(255,255,255,0.95)',
@@ -156,9 +156,9 @@ export default function ProjektyPage() {
             </p>
           </div>
           <img
-            src="/logo.png"
+            src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
-            style={{ height: 360, width: 360, objectFit: 'contain', marginLeft: 'auto', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
+            style={{ height: 360, width: 360, objectFit: 'contain', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
           />
         </div>
@@ -190,7 +190,7 @@ export default function ProjektyPage() {
               >
                   <a href={`/projekty/${project.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div style={{ padding: '22px 22px 18px' }}>
-                      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 600, marginBottom: 8 }}>{project.title}</h2>
+                      <h2 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 24, fontWeight: 600, marginBottom: 8 }}>{project.title}</h2>
                       <p style={{ fontSize: 13, color: 'var(--black-soft)', fontWeight: 500, lineHeight: 1.7, marginBottom: 14 }}>
                         {project.description.slice(0, 150)}...
                       </p>
