@@ -106,9 +106,8 @@ export default function FacebookPage() {
       {/* Uvítací sekce s logem */}
       <div style={{ background: 'var(--black)', padding: '72px 0 56px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className="hero-container">
-          <div className="hero-content">
+        <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+          <div style={{ maxWidth: 560 }}>
             <h1 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 44, fontWeight: 600, color: 'var(--white)', marginBottom: 14 }}>
               Volební program
             </h1>
@@ -123,9 +122,8 @@ export default function FacebookPage() {
           <img
             src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
-            className="hero-logo"
+            style={{ height: 360, width: 360, objectFit: 'contain', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
           />
-        </div>
         </div>
       </div>
 
