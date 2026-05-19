@@ -106,8 +106,9 @@ export default function FacebookPage() {
       {/* Uvítací sekce s logem */}
       <div style={{ background: 'var(--black)', padding: '72px 0 56px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
-          <div style={{ maxWidth: 560 }}>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="hero-container">
+          <div className="hero-content">
             <h1 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 44, fontWeight: 600, color: 'var(--white)', marginBottom: 14 }}>
               Volební program
             </h1>
@@ -122,8 +123,9 @@ export default function FacebookPage() {
           <img
             src="/LOGO_kulate.png"
             alt="Žijeme TU! logo"
-            style={{ height: 360, width: 360, objectFit: 'contain', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
+            className="hero-logo"
           />
+        </div>
         </div>
       </div>
 
@@ -151,11 +153,13 @@ export default function FacebookPage() {
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
-              <img
-                src={`/volební program/${category.folder}/${category.images[0]}`}
-                alt={category.title}
-                style={{ width: '100%', aspectRatio: '4/3', objectFit: 'contain' }}
-              />
+              <div style={{ padding: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', aspectRatio: '4/3', overflow: 'hidden' }}>
+                <img
+                  src={`/volební program/${category.folder}/${category.images[0]}`}
+                  alt={category.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', transform: category.id === 'obcane' ? 'scale(1)' : 'scale(1.45)', transition: 'transform 0.2s' }}
+                />
+              </div>
               <div style={{ padding: '20px' }}>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 600, marginBottom: 8 }}>{category.title}</h3>
               </div>

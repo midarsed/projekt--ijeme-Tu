@@ -8,10 +8,10 @@ export default function HomePage() {
       <section style={{ background: 'var(--black)', padding: '72px 0 56px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 48, flexWrap: 'wrap' }}>
+          <div className="hero-container">
 
             {/* Levý sloupec: textová část */}
-            <div style={{ flex: 1, minWidth: 280, maxWidth: 520, order: 1 }}>
+            <div className="hero-content" style={{ flex: 1, minWidth: 280, maxWidth: 520, order: 1 }}>
               {/* Badge */}
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, border: '1px solid rgba(255,255,255,0.15)', padding: '6px 14px', borderRadius: 2, marginTop: 0, marginBottom: 12 }}>
                 <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.86)' }}>
@@ -49,13 +49,8 @@ export default function HomePage() {
               <img
                 src="/LOGO_kulate.png"
                 alt="Žijeme TU! logo"
-                style={{
-                  height: 360,
-                  width: 360,
-                  objectFit: 'contain',
-                  filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))',
-                  transform: 'translateZ(0)',
-                }}
+                className="hero-logo"
+                style={{ transform: 'translateZ(0)' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
               />
             </div>
