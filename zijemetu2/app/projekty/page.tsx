@@ -130,11 +130,12 @@ export default function ProjektyPage() {
       {/* Černý vršek */}
       <div style={{
         background: 'var(--black)',
-        padding: '72px 0 48px',
+        padding: '72px 0 56px',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div className="container" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
           <div style={{ maxWidth: 560 }}>
             <h1 style={{
               fontFamily: 'Segoe UI Semibold, var(--font-display)',

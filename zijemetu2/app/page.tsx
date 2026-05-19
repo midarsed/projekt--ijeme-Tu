@@ -5,8 +5,8 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section style={{ background: 'var(--black)', padding: '48px 0', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
+      <section style={{ background: 'var(--black)', padding: '72px 0 56px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 48, flexWrap: 'wrap' }}>
 
@@ -50,11 +50,7 @@ export default function HomePage() {
                 src="/LOGO_kulate.png"
                 alt="Žijeme TU! logo"
                 style={{
-                  height: 360,
-                  width: 360,
-                  objectFit: 'contain',
-                  opacity: 1,
-                  filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))',
+                   height: 360, width: 360, objectFit: 'contain', filter: 'contrast(1.45) brightness(1.08) saturate(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.22))' }}
                   transform: 'translateZ(0)',
                 }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
