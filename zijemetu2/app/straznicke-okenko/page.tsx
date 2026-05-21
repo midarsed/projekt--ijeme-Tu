@@ -14,9 +14,12 @@ export default function StraznickeOkenkoPage() {
             <div className="hero-content" style={{ flex: 1, minWidth: 280, maxWidth: 520, order: 1 }}>
               <h1 style={{
                 fontFamily: 'Segoe UI Semibold, var(--font-display)',
-                fontSize: 44,
-                fontWeight: 600,
+                fontSize: 52,
+                fontWeight: 700,
                 color: 'var(--white)',
+                lineHeight: 1,
+                letterSpacing: '-0.02em',
+                margin: 0,
                 marginBottom: 14,
               }}>
                 Strážnické okénko
