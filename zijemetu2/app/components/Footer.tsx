@@ -23,7 +23,7 @@ export default function Footer() {
 
           <div>
             <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#555', marginBottom: 16 }}>Navigace</div>
-            {[['/', 'Úvod'], ['/projekty', 'Projekty'], ['/facebook', 'Aktivity'], ['/o-nas', 'O nás'], ['/kontakt', 'Kontakt']].map(([href, label]) => (
+            {[['/', 'Úvod'], ['/projekty', 'Projekty'], ['/facebook', 'Aktivity'], ['/straznicke-okenko', 'Strážnické okénko'], ['/o-nas', 'O nás'], ['/kontakt', 'Kontakt']].map(([href, label]) => (
               <Link key={href} href={href} style={{ display: 'block', fontSize: 14, color: '#888', marginBottom: 8, textDecoration: 'none' }}>{label}</Link>
             ))}
           </div>

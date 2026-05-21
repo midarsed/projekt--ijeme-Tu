@@ -43,11 +43,11 @@ export default function Navbar() {
           </div>
 
           {/* Desktop nav - střed, skryté na mobilu */}
-          <div className="nav-desktop hidden md:flex" style={{ display: 'flex', gap: 32, alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-            {[['/', 'O nás'], ['/facebook', 'Volební program'], ['/projekty', 'Projekty'], ['/o-nas', 'Kandidátka'], ['/potkejme-se', 'Potkejme se'], ['/kontakt', 'Kontakt']].map(([href, label]) => (
+          <div className="nav-desktop hidden md:flex" style={{ display: 'flex', gap: 18, alignItems: 'center', flex: 1, justifyContent: 'center', flexWrap: 'wrap' }}>
+            {[['/', 'O nás'], ['/facebook', 'Volební program'], ['/projekty', 'Projekty'], ['/o-nas', 'Kandidátka'], ['/potkejme-se', 'Potkejme se'], ['/straznicke-okenko', 'Strážnické okénko'], ['/kontakt', 'Kontakt']].map(([href, label]) => (
               <Link key={href} href={href} style={{
-                fontSize: 14, fontWeight: 700, color: 'black',
-                letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none',
+                fontSize: 12.5, fontWeight: 700, color: 'black',
+                letterSpacing: '0.04em', textTransform: 'uppercase', textDecoration: 'none',
               }}>{label}</Link>
             ))}
           </div>
@@ -143,6 +143,7 @@ export default function Navbar() {
                   { href: '/projekty', label: 'Projekty' },
                   { href: '/o-nas', label: 'Kandidátka' },
                   { href: '/potkejme-se', label: 'Potkejme se' },
+                  { href: '/straznicke-okenko', label: 'Strážnické okénko' },
                   { href: '/kontakt', label: 'Kontakt' },
                 ].map(({ href, label }) => (
                   <Link 
