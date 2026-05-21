@@ -44,8 +44,8 @@ const staticProjects = [
   },
   {
     id: '3',
-    title: 'Naše hřiště vs. hřiště v okolí',
-    description: 'Rozdíl není jen v designu, ale hlavně v kvalitě, údržbě, funkčnosti, udržitelnosti a v neposlední řadě bezpečnosti. Hřiště v okolních obcích už v dnešní době vznikají jako promyšlené projekty, které pracují s terénem, zelení, různorodými povrchy i klidovými zónami pro rodiče. Tento přístup přirozeně rozšiřuje cílovou skupinu a umožňuje celoroční využití prostoru napříč všemi věkovými skupinami. Naopak ve Strážnici u typizovaných hřišť se stále potýkáme s omezeným věkovým rozpětím. Chtěly bychom ve Strážnici kvalitní hřiště a veřejný prostor, který je moderní, bezpečný, udržitelný a přirozeně zapadá do svého okolí, nejen dnes, ale i za deset či dvacet let.',
+    title: 'Analýza hřišť Strážnice vs. okolí',
+    description: 'Vytvořily jsme srovnání hřišť, které zachycuje rozdíly reflektující proč naše hřiště zaostávají nad současnými. Rozdíl není jen v designu, ale hlavně v kvalitě, údržbě, funkčnosti, udržitelnosti a v neposlední řadě bezpečnosti. Hřiště v okolních obcích už v dnešní době vznikají jako promyšlené projekty, které pracují s terénem, zelení, různorodými povrchy i klidovými zónami pro rodiče. Tento přístup přirozeně rozšiřuje cílovou skupinu a umožňuje celoroční využití prostoru napříč všemi věkovými skupinami. Naopak ve Strážnici u typizovaných hřišť se stále potýkáme s omezeným věkovým rozpětím. Chtěly bychom ve Strážnici kvalitní hřiště a veřejný prostor, který je moderní, bezpečný, udržitelný a přirozeně zapadá do svého okolí, nejen dnes, ale i za deset či dvacet let.',
     category: 'Srovnání',
     cost: 'K určení',
     voting_ends_at: null,
@@ -61,7 +61,7 @@ const staticProjects = [
     ],
     comparisonGroups: [
       {
-        title: 'Naše hřiště',
+        title: 'Hřiště ve Strážnici',
         images: [
           '/projekty/srovnani-nase-uprkova.png',
           '/projekty/srovnani-nase-orechovka.png',
@@ -83,7 +83,7 @@ const staticProjects = [
   {
     id: '4',
     title: 'HŘIŠTĚ A SPORTOVIŠTĚ',
-    description: 'Naší představou je kultivovaný veřejný prostor s promyšlenou strukturou, přírodními herními prvky, možností pohybu po bezpečném povrchu i možnost klidového pobytu v zeleni. 🌿Návrh zároveň pracuje s diferenciací řešení – je zde ukázka jak přírodního hřiště, tak i modernějšího pojetí s různými prvky povrchů i využití, aby bylo možné zvolit nejvhodnější řešení pro dané místo. Cílem je funkční a přehledné místo pro všechny generace, které bude přirozeně začleněno do okolí a dlouhodobě udržitelné. Nejde o velká hřiště, ale o příjemné místo pro děti, rodiče i seniory, kde se dá hrát, odpočívat i potkávat.',
+    description: 'Hřiště a sportoviště: Naší představou je vytvářet kultivovaný veřejný prostor s promyšlenou strukturou, přírodními herními prvky, možností pohybu po bezpečném povrchu i možnost klidového pobytu v zeleni. Přiložené návrhy demonstrují různé pojetí konkrétních hřišť, s přihlédnutím k jejich výchozím danostem a lokaci. Vidíme tak možnost vytvoření přírodního hřiště, ale i moderní pojetí s různými prvky povrchů i využití, aby bylo možné zvolit nejvhodnější řešení pro dané místo. Cílem je funkční a přehledné místo pro všechny generace, které bude přirozeně začleněno do okolí a dlouhodobě udržitelné. Nejde o velká hřiště, ale o příjemné místo pro děti, rodiče i seniory, kde se dá hrát, odpočívat i potkávat.',
     category: 'Sportovní vybavení',
     cost: 'K určení',
     voting_ends_at: null,
@@ -92,9 +92,30 @@ const staticProjects = [
     video_url: null,
     order_num: 4,
     images: [
-      '/projekty/projekty2/hřiště a sportoviště vedlejší1.jpg',
-      '/projekty/projekty2/hřiště a sportoviště vedlejší2.jpg',
-      '/projekty/projekty2/hřiště a sportoviště vedlejší3.jpg'
+      '/projekty/projekty2/hřiště a sportoviště vedlejší3.jpg',
+      '/projekty/projekty2/hřiště a sportoviště vedlejší2.jpg'
+    ]
+  },
+  {
+    id: '5',
+    title: 'Revitalizace herních a odpočinkových ploch Kovářská',
+    description: 'Abychom ukázaly, jakým způsobem by se v rámci plánování hřišť a sportovišť mělo správně postupovat, předkládáme ilustrační návrh revitalizace ploch v ulici Kovářská, 🏙️ který slouží jako modelový příklad moderního přístupu k urbanistickému plánování sportovišť ve Strážnici. Naším cílem není pouze výměna vysloužilých herních prvků, 🎠 ale vytvoření multifunkčního komunitního uzlu, 🤝 který reaguje na potřeby všech věkových skupin obyvatel v centru města. 👨‍👩‍👧‍👦 Navržené koncepční řešení 📐 pracuje i s dosud nevyužitými prostory, se zelení, 🌱 a tolik absentujícím funkčním zónováním (Intergenerační mix): uzavřená zóna pro batolata, zóna aktivního pohybu pro děti školního věku, teen-zóna a fitness se začleněním workoutových prvků 💪 a míst pro setkávání, které eliminují potřebu teenagerů obsazovat prvky pro malé děti. ✅ Tento příklad ulice Kovářská jasně ukazuje, že strategické plánování může proměnit zanedbaná prostranství v reprezentativní místa, která zvyšují hodnotu bydlení v našem městě a podporují zdravý životní styl napříč generacemi. 🫶',
+    category: 'Sportovní vybavení',
+    cost: 'K určení',
+    voting_ends_at: null,
+    created_at: new Date().toISOString(),
+    image_url: 'https://picsum.photos/seed/kovarska/400/300.jpg',
+    video_url: null,
+    order_num: 5,
+    images: [
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_obr_celek_1.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_1.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_obr_celek_2.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_2_U.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_obr_celek_3.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_3_U.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_obr_celek_4.jpg',
+      '/projekty/projekty-Revitalizace herních a odpočinkových ploch Kovářská/KOVARSKA_4.jpg'
     ]
   }
 ]
@@ -442,7 +463,7 @@ export default function ProjectDetailPage() {
                 <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: 18 }}>
                   <img
                     src={(project as any).comparisonTextImage}
-                    alt="Srovnání Naše hřiště vs. hřiště v okolí"
+                    alt="Srovnání Strážnice vs. okolí"
                     onClick={() => openLightbox(galleryImages.length)}
                     style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius)', cursor: 'pointer' }}
                   />

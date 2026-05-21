@@ -1,28 +1,126 @@
+﻿'use client'
+import { useState } from 'react'
+import Link from 'next/link'
+
+const posts = [
+  {
+    id: 'den-matek',
+    category: 'Potkejme se',
+    title: 'Den matek na zahradě sv. Martina',
+    excerpt: 'V neděli 10. května jsme měly možnost prezentovat naše sdružení na akci Rodinného centra pořádané ke Dni matek🌸.',
+    text: 'V neděli 10. května jsme měly možnost prezentovat naše sdružení na akci Rodinného centra pořádané ke Dni matek🌸. Rozdaly jsme spoustu dárečků, probraly s vámi naše volební vize a děti nás ohromily svými znalostmi v kvízu o místních památkách🙌. Těšíme se na další spolupráci a setkání s vámi 🤝.',
+    image: '/potkejme%20se/den%20matek/att.3bhmMCb7PxiCsnfx5Y36rwsSmEd8KWwsItk6lnd3_BE.jpg',
+    alt: 'Den matek na zahradě sv. Martina'
+  }
+]
+
 export default function PotkejmeSePage() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
+
   return (
     <>
       <div style={{ background: 'var(--black)', padding: '72px 0 56px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="hero-container">
-          <div className="hero-content">
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.84)', marginBottom: 10 }}>Potkejme se</div>
-            <h1 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 52, fontWeight: 700, color: 'var(--white)', marginBottom: 16 }}>Potkejme se</h1>
-            <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, maxWidth: 520, lineHeight: 1.8 }}>Pokud máte zájem o prezentaci našeho sdružení, neváhejte, rády se s vámi sejdeme.</p>
+            <div className="hero-content">
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.84)', marginBottom: 10 }}>Potkejme se</div>
+              <h1 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 52, fontWeight: 700, color: 'var(--white)', marginBottom: 16 }}>Potkejme se</h1>
+              <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, maxWidth: 520, lineHeight: 1.8 }}>Pokud máte zájem o prezentaci našeho sdružení, neváhejte, rády se s vámi sejdeme.</p>
+            </div>
+            <img
+              src="/LOGO_kulate.png"
+              alt="Žijeme TU! logo"
+              className="hero-logo"
+            />
           </div>
-          <img
-            src="/LOGO_kulate.png"
-            alt="Žijeme TU! logo"
-            className="hero-logo"
-          />
-        </div>
         </div>
       </div>
 
       <section style={{ padding: '72px 0' }}>
         <div className="container">
+          <div style={{ display: 'grid', justifyContent: 'flex-start', gap: 28 }}>
+            {posts.map((post) => (
+                <article
+                  key={post.id}
+                  style={{
+                    width: '100%',
+                    maxWidth: 520,
+                    border: '1px solid var(--border)',
+                    background: 'var(--white)',
+                    borderRadius: 'var(--radius)',
+                    overflow: 'hidden',
+                    boxShadow: '0 18px 55px rgba(0,0,0,0.05)'
+                  }}
+                >
+                  <div style={{ padding: '20px 20px 16px' }}>
+                    <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--gray)', marginBottom: 8 }}>{post.category}</div>
+                    <h2 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 24, fontWeight: 700, margin: '0 0 12px' }}>{post.title}</h2>
+                    <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--text)', margin: '0 0 16px' }}>
+                      {post.excerpt}
+                    </p>
+                    <Link href={`/potkejme-se/${post.id}`} style={{
+                      color: 'var(--black)',
+                      fontSize: 12,
+                      fontWeight: 700,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      textDecoration: 'none'
+                    }}>
+                      Číst dál
+                    </Link>
+                  </div>
+
+                  <div style={{ position: 'relative', borderTop: '1px solid var(--border)' }}>
+                    <button
+                      type="button"
+                      onClick={() => setLightbox({ src: post.image, alt: post.alt })}
+                      style={{
+                        border: 'none',
+                        background: 'transparent',
+                        padding: 0,
+                        width: '100%',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <img
+                        src={post.image}
+                        alt={post.alt}
+                        style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', display: 'block' }}
+                      />
+                      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 12, background: 'linear-gradient(180deg, transparent, rgba(0,0,0,0.24))', color: 'var(--white)', fontSize: 11, fontWeight: 600 }}>
+                        Klikněte pro zvětšení
+                      </div>
+                    </button>
+                  </div>
+                </article>
+            ))}
+          </div>
         </div>
       </section>
+
+      {lightbox && (
+        <div
+          onClick={() => setLightbox(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.75)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 24,
+            zIndex: 9999,
+            cursor: 'pointer'
+          }}
+        >
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', cursor: 'auto', borderRadius: 'var(--radius)' }}
+          />
+        </div>
+      )}
     </>
   )
 }
