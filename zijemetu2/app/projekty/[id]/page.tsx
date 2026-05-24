@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useAuth } from '../../lib/auth-context'
 import { supabase, Project } from '../../lib/supabase'
 import AuthModal from '../../components/AuthModal'
@@ -447,12 +448,13 @@ export default function ProjectDetailPage() {
                         .slice(0, groupIdx)
                         .reduce((sum: number, g: any) => sum + g.images.length, 0) + idx
                       return (
-                        <img
+                        <Image
                           key={img}
                           src={img}
                           alt={`${group.title} - ${idx + 1}`}
-                          loading="lazy"
-                          decoding="async"
+                          width={600}
+                          height={260}
+                          quality={80}
                           onClick={() => openLightbox(globalIndex)}
                           style={{ width: '100%', height: 260, objectFit: 'cover', borderRadius: 'var(--radius)', cursor: 'pointer' }}
                         />
@@ -463,11 +465,12 @@ export default function ProjectDetailPage() {
               ))}
               {(project as any).comparisonTextImage && (
                 <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: 18 }}>
-                  <img
+                  <Image
                     src={(project as any).comparisonTextImage}
-                    alt="Srovnání Strážnice vs. okolí"
-                    loading="lazy"
-                    decoding="async"
+                    alt="Srovnění Strážnice vs. okolí"
+                    width={1200}
+                    height={675}
+                    quality={80}
                     onClick={() => openLightbox(galleryImages.length)}
                     style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius)', cursor: 'pointer' }}
                   />
@@ -486,9 +489,10 @@ export default function ProjectDetailPage() {
               }}
             >
               {galleryImages.map((img: string, idx: number) => (
-                <img key={idx} src={img} alt={`${project.title} - fotka ${idx + 1}`} 
-                  loading="lazy"
-                  decoding="async"
+                <Image key={idx} src={img} alt={`${project.title} - fotka ${idx + 1}`} 
+                  width={400}
+                  height={400}
+                  quality={80}
                   onClick={() => openLightbox(idx)}
                   style={{
                     width: '100%',
