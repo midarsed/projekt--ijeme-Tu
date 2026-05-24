@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { useAuth } from '../../lib/auth-context'
 import { supabase, Project } from '../../lib/supabase'
 import AuthModal from '../../components/AuthModal'
@@ -448,16 +447,15 @@ export default function ProjectDetailPage() {
                         .slice(0, groupIdx)
                         .reduce((sum: number, g: any) => sum + g.images.length, 0) + idx
                       return (
-                        <div key={img} onClick={() => openLightbox(globalIndex)} style={{ cursor: 'pointer', overflow: 'hidden', borderRadius: 'var(--radius)' }}>
-                          <Image
-                            src={img}
-                            alt={`${group.title} - ${idx + 1}`}
-                            width={600}
-                            height={260}
-                            quality={80}
-                            style={{ width: '100%', height: 260, objectFit: 'cover', display: 'block' }}
-                          />
-                        </div>
+                        <img
+                          key={img}
+                          src={img}
+                          alt={`${group.title} - ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
+                          onClick={() => openLightbox(globalIndex)}
+                          style={{ width: '100%', height: 260, objectFit: 'cover', borderRadius: 'var(--radius)', cursor: 'pointer', display: 'block' }}
+                        />
                       )
                     })}
                   </div>
@@ -465,16 +463,14 @@ export default function ProjectDetailPage() {
               ))}
               {(project as any).comparisonTextImage && (
                 <div style={{ background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: 18 }}>
-                  <div onClick={() => openLightbox(galleryImages.length)} style={{ cursor: 'pointer', overflow: 'hidden', borderRadius: 'var(--radius)' }}>
-                    <Image
-                      src={(project as any).comparisonTextImage}
-                      alt="Srovnění Strážnice vs. okolí"
-                      width={1200}
-                      height={675}
-                      quality={80}
-                      style={{ width: '100%', height: 'auto', display: 'block' }}
-                    />
-                  </div>
+                  <img
+                    src={(project as any).comparisonTextImage}
+                    alt="Srovnění Strážnice vs. okolí"
+                    loading="lazy"
+                    decoding="async"
+                    onClick={() => openLightbox(galleryImages.length)}
+                    style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius)', cursor: 'pointer' }}
+                  />
                 </div>
               )}
             </div>
@@ -490,25 +486,21 @@ export default function ProjectDetailPage() {
               }}
             >
               {galleryImages.map((img: string, idx: number) => (
-                <div key={idx} onClick={() => openLightbox(idx)} style={{
-                  cursor: 'pointer',
-                  overflow: 'hidden',
-                  borderRadius: 'var(--radius)',
-                  aspectRatio: '1 / 1',
-                }}>
-                  <Image src={img} alt={`${project.title} - fotka ${idx + 1}`} 
-                    width={400}
-                    height={400}
-                    quality={80}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      display: 'block',
-                    }}
-                  />
-                </div>
+                <img key={idx} src={img} alt={`${project.title} - fotka ${idx + 1}`} 
+                  loading="lazy"
+                  decoding="async"
+                  onClick={() => openLightbox(idx)}
+                  style={{
+                    width: '100%',
+                    aspectRatio: '1 / 1',
+                    height: 'auto',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    display: 'block',
+                    borderRadius: 'var(--radius)',
+                    cursor: 'pointer',
+                  }}
+                />
               ))}
             </div>
           ))}
@@ -633,6 +625,7 @@ export default function ProjectDetailPage() {
           <img 
             src={allLightboxImages[lightboxIndex]} 
             alt="Fotka v plné velikosti"
+            loading="eager"
             onClick={(e) => e.stopPropagation()}
             style={{
               width: '100vw',
