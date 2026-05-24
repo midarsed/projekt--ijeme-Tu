@@ -451,6 +451,8 @@ export default function ProjectDetailPage() {
                           key={img}
                           src={img}
                           alt={`${group.title} - ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
                           onClick={() => openLightbox(globalIndex)}
                           style={{ width: '100%', height: 260, objectFit: 'cover', borderRadius: 'var(--radius)', cursor: 'pointer' }}
                         />
@@ -464,6 +466,8 @@ export default function ProjectDetailPage() {
                   <img
                     src={(project as any).comparisonTextImage}
                     alt="Srovnání Strážnice vs. okolí"
+                    loading="lazy"
+                    decoding="async"
                     onClick={() => openLightbox(galleryImages.length)}
                     style={{ width: '100%', height: 'auto', borderRadius: 'var(--radius)', cursor: 'pointer' }}
                   />
@@ -483,6 +487,8 @@ export default function ProjectDetailPage() {
             >
               {galleryImages.map((img: string, idx: number) => (
                 <img key={idx} src={img} alt={`${project.title} - fotka ${idx + 1}`} 
+                  loading="lazy"
+                  decoding="async"
                   onClick={() => openLightbox(idx)}
                   style={{
                     width: '100%',
