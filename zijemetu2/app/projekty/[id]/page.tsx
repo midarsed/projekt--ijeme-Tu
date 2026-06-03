@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../../lib/auth-context'
 import { supabase, Project } from '../../lib/supabase'
 import AuthModal from '../../components/AuthModal'
+import ConfirmModal from '../../components/ConfirmModal'
 import { formatDistanceToNow } from 'date-fns'
 import { cs } from 'date-fns/locale'
 import { useParams } from 'next/navigation'
@@ -135,6 +136,45 @@ export default function ProjectDetailPage() {
   const [commentError, setCommentError] = useState('')
   const [commentLoading, setCommentLoading] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [transferOpen, setTransferOpen] = useState(false)
+  const [transferLoading, setTransferLoading] = useState(false)
+
+  async function refreshVotes(projId: string, currentUserId: string | null) {
+    try {
+      const { data: allVotes, error: allVotesError } = await supabase
+        .from('votes')
+        .select('*')
+        .eq('project_id', projId)
+
+      if (allVotesError) {
+        console.error('Chyba při načítání hlasů:', allVotesError)
+        setVotes(prev => ({ ...prev, [projId]: 0 }))
+      } else {
+        setVotes(prev => ({ ...prev, [projId]: allVotes?.length || 0 }))
+      }
+
+      if (currentUserId) {
+        const { data: currentUserVotes, error: userVotesError } = await supabase
+          .from('votes')
+          .select('*')
+          .eq('project_id', projId)
+          .eq('user_id', currentUserId)
+
+        if (userVotesError) {
+          console.error('Chyba při načítání uživatelských hlasů:', userVotesError)
+          setUserVotes(new Set())
+        } else {
+          setUserVotes(currentUserVotes && currentUserVotes.length > 0 ? new Set([projId]) : new Set())
+        }
+      } else {
+        setUserVotes(new Set())
+      }
+    } catch (err) {
+      console.error('Neočekaná chyba při načítání hlasů:', err)
+      setVotes(prev => ({ ...prev, [projId]: 0 }))
+      setUserVotes(new Set())
+    }
+  }
 
   useEffect(() => {
     async function loadVotes() {
@@ -147,41 +187,9 @@ export default function ProjectDetailPage() {
       setProject(foundProject)
       
       try {
-        // Načtení všech hlasů pro projekt
-        const { data: allVotes, error } = await supabase
-          .from('votes')
-          .select('*')
-          .eq('project_id', projectId)
-        
-        if (error) {
-          console.log('Chyba při načítání hlasů:', error)
-          // Fallback na lokální stav
-          setVotes({ [projectId]: 0 })
-          setUserVotes(new Set())
-        } else {
-          // Nastavení počtu hlasů
-          setVotes({ [projectId]: allVotes?.length || 0 })
-          
-          // Načtení hlasů přihlášeného uživatele
-          if (user) {
-            const { data: userVotes } = await supabase
-              .from('votes')
-              .select('*')
-              .eq('project_id', projectId)
-              .eq('user_id', user.id)
-            
-            if (userVotes && userVotes.length > 0) {
-              setUserVotes(new Set([projectId]))
-            } else {
-              setUserVotes(new Set())
-            }
-          } else {
-            setUserVotes(new Set())
-          }
-        }
+        await refreshVotes(projectId, user ? String(user.id) : null)
       } catch (err) {
         console.log('Chyba:', err)
-        // Fallback na lokální stav
         setVotes({ [projectId]: 0 })
         setUserVotes(new Set())
       }
@@ -193,84 +201,100 @@ export default function ProjectDetailPage() {
   }, [projectId, user])
 
   async function handleVote() {
-    if (!user) { setAuthOpen(true); return }
     if (!project) return
-    
-    const voted = userVotes.has(project.id)
-    console.log('=== HANDLEVOTE START ===')
-    console.log('User:', user)
-    console.log('Project:', project)
-    console.log('Voted:', voted)
-    console.log('Current votes:', votes)
-    
+
+    if (!user) {
+      setAuthOpen(true)
+      return
+    }
+
+    // Zkontrolujeme, zda má uživatel ověřený email
+    if (!(user as any).verified) {
+      alert('Pro hlasování musíte ověřit svůj email. Zkontrolujte schránku a potvrďte odkaz.')
+      return
+    }
+
     try {
-      if (voted) {
-        // Smazání hlasu
-        console.log('MAZÁNÍ HLASU')
-        const { error, data } = await supabase
-          .from('votes')
-          .delete()
-          .eq('project_id', project.id)
-          .eq('user_id', user.id)
-          .select()
-        
-        console.log('Výsledek mazání:', { error, data })
-        
-        if (error) {
-          console.error('Chyba při mazání hlasu:', error)
-          alert(`Chyba při mazání hlasu: ${error.message}`)
+      const userId = String((user as any).id)
+      const alreadyVoted = userVotes.has(project.id)
+
+      if (alreadyVoted) {
+        // Zavoláme serverovou API, která používá service role key
+        const res = await fetch('/api/votes', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ project_id: String(project.id), user_id: userId })
+        })
+
+        const data = await res.json()
+        if (!res.ok) {
+          console.error('Chyba při odstraňování hlasu (API):', data)
+          alert('Nepodařilo se odebrat hlas: ' + (data.error || res.statusText))
           return
         }
-        
-        // Aktualizace UI
-        const newVotes = { ...votes, [project.id]: Math.max(0, (votes[project.id] || 1) - 1) }
-        console.log('Nové hlasy po smazání:', newVotes)
-        setVotes(newVotes)
-        setUserVotes(p => { const s = new Set(p); s.delete(project.id); return s })
-      } else {
-        // Přidání hlasu
-        console.log('PŘIDÁVÁNÍ HLASU')
-        const { error, data } = await supabase
-          .from('votes')
-          .insert({
-            project_id: project.id,
-            user_id: user.id
-          })
-          .select()
-        
-        console.log('Výsledek přidávání:', { error, data })
-        
-        if (error) {
-          console.error('Chyba při přidávání hlasu:', error)
-          alert(`Chyba při přidávání hlasu: ${error.message}`)
-          return
-        }
-        
-        // Aktualizace UI
-        const newVotes = { ...votes, [project.id]: (votes[project.id] || 0) + 1 }
-        console.log('Nové hlasy po přidání:', newVotes)
-        setVotes(newVotes)
-        setUserVotes(p => new Set([...Array.from(p), project.id]))
+
+        await refreshVotes(String(project.id), userId)
+        return
       }
-      
-      // Znovu načtení hlasů z databáze pro ověření
-      setTimeout(async () => {
-        console.log('KONTROLNÍ NAČTENÍ HLASŮ')
-        const { data: allVotes, error: checkError } = await supabase
-          .from('votes')
-          .select('*')
-          .eq('project_id', project.id)
-        
-        console.log('Kontrolní výsledek:', { allVotes, checkError, count: allVotes?.length })
-        
-        if (!checkError) {
-          setVotes({ [project.id]: allVotes?.length || 0 })
+
+      const res = await fetch('/api/votes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project_id: String(project.id), user_id: userId })
+      })
+
+      const data = await res.json()
+      if (!res.ok) {
+        console.error('Chyba při přidávání hlasu (API):', data)
+        if (res.status === 409) {
+          // Otevřeme modal pro nabídku přesunu hlasu
+          setTransferOpen(true)
+          return
         }
-      }, 1000)
-      
+
+        const msg = String(data.error || '')
+        if (msg.includes('unique') || msg.includes('already')) {
+          alert('Pro tento projekt už jste hlasovali')
+          return
+        }
+        alert('Chyba při přidávání hlasu: ' + (data.error || res.statusText))
+        return
+      }
+
+      await refreshVotes(String(project.id), userId)
     } catch (err) {
-      console.error('Neočekaná chyba:', err)
-      alert(`Neočekaná chyba: ${err instanceof Error ? err.message : 'Neznámá chyba'}`)
+      console.error('Neočekaná chyba při hlasování:', err)
+      alert('Neočekaná chyba při hlasování. Zkuste to prosím později.')
+    }
+  }
+
+  async function performTransfer() {
+    if (!project || !user) return
+    try {
+      setTransferLoading(true)
+      const userId = String((user as any).id)
+      const res = await fetch('/api/votes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project_id: String(project.id), user_id: userId, transfer: true })
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        console.error('Chyba při přesunu hlasu (API):', data)
+        alert('Nepodařilo se přesunout hlas: ' + (data.error || res.statusText))
+        setTransferLoading(false)
+        setTransferOpen(false)
+        return
+      }
+
+      await refreshVotes(String(project.id), String((user as any).id))
+      setTransferLoading(false)
+      setTransferOpen(false)
+    } catch (err) {
+      console.error('Neočekaná chyba při přesunu hlasu:', err)
+      alert('Neočekaná chyba při přesunu hlasu. Zkuste to později.')
+      setTransferLoading(false)
+      setTransferOpen(false)
     }
   }
 
@@ -362,6 +386,15 @@ export default function ProjectDetailPage() {
   return (
     <>
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
+      <ConfirmModal
+        isOpen={transferOpen}
+        title="Přesun hlasu"
+        message="Už jste hlasovali pro jiný projekt. Přejete si přesunout svůj hlas na tento projekt?"
+        confirmText={transferLoading ? 'Přesouvání…' : 'Přesunout'}
+        cancelText="Zrušit"
+        onConfirm={performTransfer}
+        onCancel={() => setTransferOpen(false)}
+      />
       <div style={{ background: 'var(--black)', padding: '72px 0 48px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
@@ -415,17 +448,18 @@ export default function ProjectDetailPage() {
             </div>
 
             {isVotable ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '20px 0', borderTop: '1px solid var(--border)' }}>
-                <div style={{ textAlign: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 20, borderTop: '1px solid var(--border)', background: 'var(--white)', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}>
+                <img src="/LOGO_kulate.png" alt="Žijeme TU!" style={{ width: 64, height: 64, objectFit: 'contain', flex: '0 0 auto' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                <div style={{ textAlign: 'center', minWidth: 96 }}>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 42, fontWeight: 700, lineHeight: 1, color: voted ? 'var(--black)' : 'var(--gray)' }}>{vc}</div>
                   <div style={{ fontSize: 11, color: 'var(--gray)' }}>hlasů</div>
                 </div>
                 <div style={{ flex: 1 }}>
-                  <button onClick={handleVote} disabled={!!expired}
-                    style={{ padding: '12px 24px', fontSize: 14, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', border: '1px solid var(--black)', background: voted ? 'var(--black)' : 'transparent', color: voted ? 'var(--white)' : 'var(--black)', cursor: expired ? 'not-allowed' : 'pointer', opacity: expired ? 0.4 : 1, borderRadius: 'var(--radius)', whiteSpace: 'nowrap' }}>
+                  <button onClick={handleVote} disabled={!user || !!expired}
+                    style={{ padding: '12px 24px', fontSize: 14, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', border: '1px solid var(--black)', background: voted ? 'var(--black)' : 'transparent', color: voted ? 'var(--white)' : 'var(--black)', cursor: (!user || expired) ? 'not-allowed' : 'pointer', opacity: (!user || expired) ? 0.6 : 1, borderRadius: 'var(--radius)', whiteSpace: 'nowrap' }}>
                     {voted ? '✓ Hlasováno' : 'Hlasovat'}
                   </button>
-                  {!user && !expired && <p style={{ fontSize: 12, color: 'var(--gray)', marginTop: 8 }}>Nutná registrace pro hlasování</p>}
+                  {!user && <p style={{ fontSize: 12, color: 'var(--gray)', marginTop: 8 }}>Pro hlasování se prosím přihlaste nebo zaregistrujte.</p>}
                 </div>
               </div>
             ) : (

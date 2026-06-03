@@ -9,6 +9,7 @@ export default async function ONasPage() {
   const candidates = await getCandidates()
   return (
     <>
+      
       <div style={{ background: 'var(--black)', padding: '72px 0 56px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -55,6 +56,32 @@ export default async function ONasPage() {
                 </div>
               </div>
             ))}
+          </div>
+          <div style={{ marginTop: 32 }}>
+            <div style={{ display: 'grid', gap: 20 }}>
+              <article style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.06)' }}>
+                <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', background: '#000' }}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/dMJtWS_vYrM?rel=0&modestbranding=1`}
+                    title="dMJtWS_vYrM"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                  />
+                </div>
+              </article>
+              <article style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.06)' }}>
+                <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', background: '#000' }}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/_inA8JY0Vr8?rel=0&modestbranding=1`}
+                    title="_inA8JY0Vr8"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                  />
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>

@@ -26,7 +26,20 @@ export default function PotkejmeSePage() {
             <div className="hero-content">
               <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.84)', marginBottom: 10 }}>Potkejme se</div>
               <h1 style={{ fontFamily: 'Segoe UI Semibold, var(--font-display)', fontSize: 52, fontWeight: 700, color: 'var(--white)', marginBottom: 16 }}>Potkejme se</h1>
-              <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, maxWidth: 520, lineHeight: 1.8 }}>Pokud máte zájem o prezentaci našeho sdružení, neváhejte, rády se s vámi sejdeme.</p>
+              <div style={{ maxWidth: 520 }}>
+                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.8, marginBottom: 12 }}>
+                  Pojďme si popovídat osobně
+                </p>
+                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.8, marginBottom: 12 }}>
+                  Jsme ženy, sousedky a hlavně aktivní obyvatelky našeho města, kterým záleží na tom, jak se nám zde společně žije. Proto nás můžete často potkat na nejrůznějších akcích a slavnostech, kde rády pomáháme a šíříme naši vizi (mrkněte na fotky níže!).
+                </p>
+                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.8, marginBottom: 12 }}>
+                  Chceme vám být nablízku, a proto pro vás chystáme další příležitosti k neformálnímu potkávání. Přijďte za námi na některou z chystaných akcí – rády vám osobně představíme naše projekty.
+                </p>
+                <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.8 }}>
+                  Máte otázku hned teď nebo se chcete potkat individuálně? Stačí nám napsat, jsme tu pro vás!
+                </p>
+              </div>
             </div>
             <img
               src="/LOGO_kulate.png"

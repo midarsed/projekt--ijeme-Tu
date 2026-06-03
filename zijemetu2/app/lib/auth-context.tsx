@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 
-type AuthUser = { id: string; email: string; role: 'user' | 'admin' | 'team' }
+type AuthUser = { id: string; email: string; role: 'user' | 'admin' | 'team'; verified?: boolean }
 type AuthContextType = {
   user: AuthUser | null
   loading: boolean
@@ -45,7 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (data.error) return { error: data.error }
     setUser(data.user)
     localStorage.setItem('zijemetu_user', JSON.stringify(data.user))
-    return {}
+    return { message: data.message || 'Registrováno' }
   }
 
   const logout = () => {

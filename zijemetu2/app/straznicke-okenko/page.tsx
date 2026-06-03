@@ -1,6 +1,8 @@
 const videos = [
+  { id: 'ng1OXGsMi8I', title: 'Děravá kalamita' },
+  { id: 'AxgWAOsCuUA', title: 'První vrstva problému našeho města' },
   { id: 'FsbfXjVP45s', title: 'Cesta na tenis s Jožinem' },
-  { id: 'toSduZgn6Ao', title: 'otvírajte sa strážnické brány!' },
+  { id: 'toSduZgn6Ao', title: 'Otvírejte strážnické brány!' },
   { id: '_LgKHxR3gW0', title: 'Psychedelická čekárna' },
 ]
 
@@ -23,8 +25,22 @@ export default function StraznickeOkenkoPage() {
                 marginBottom: 14,
               }}>
                 Strážnické okénko
-              </h1>
-              <a
+                </h1>
+                <div style={{ maxWidth: 520, marginTop: 12 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
+                    Strážnické okénko: Když už člověk neví, jestli se má smát, nebo plakat.
+                  </p>
+                  <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
+                    Říká se, že s úsměvem jde všechno líp. Někdy jsou ale věci v našem městě tak absurdní, že humor zůstává tou poslední obranou. V našem Strážnickém okénku se s nadhledem a satirou díváme na to, co ve městě (ne)funguje.
+                  </p>
+                  <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
+                    Posvítili jsme si na zpackané investice, netransparentní rozhodování za zavřenými dveřmi i na situace, kdy vedení města s občany raději nekomunikuje vůbec. Protože věříme, že nejlepší lék na zametání problémů pod koberec je vytáhnout je na světlo světa.
+                  </p>
+                  <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.7 }}>
+                    Pohodlně se usaďte a podívejte se na Strážnici z úhlu, který v oficiálním zpravodaji nenajdete.
+                  </p>
+                </div>
+                <a
                 href="https://www.youtube.com/@%C5%BDijemeTU"
                 target="_blank"
                 rel="noopener noreferrer"

@@ -4,6 +4,7 @@ CREATE TABLE users (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
+  email_verified BOOLEAN DEFAULT FALSE,
   role TEXT DEFAULT 'user' CHECK (role IN ('user', 'admin', 'team')),
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -26,6 +27,17 @@ CREATE TABLE votes (
   created_at TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(user_id, project_id)
 );
+
+CREATE TABLE password_resets (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  token TEXT NOT NULL UNIQUE,
+  expires_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_password_resets_user_id ON password_resets(user_id);
+CREATE INDEX IF NOT EXISTS idx_password_resets_token ON password_resets(token);
 
 CREATE TABLE comments (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,

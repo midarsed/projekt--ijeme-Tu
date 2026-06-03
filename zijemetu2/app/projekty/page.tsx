@@ -167,13 +167,21 @@ export default function ProjektyPage() {
             }}>
               Projekty a vize
             </h1>
-            <p style={{
-              color: 'rgba(255,255,255,0.95)',
-              fontSize: 15,
-              fontWeight: 600,
-              maxWidth: 520,
-              lineHeight: 1.7
-            }}>
+            <div style={{ maxWidth: 520 }}>
+              <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 15, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
+                Místo slibů přinášíme konkrétní řešení
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 15, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
+                Všichni chceme žít v lepším, modernějším a bezpečnějším městě. V letošních volbách vám proto nechceme předkládat jen líbivé sliby. Chceme vám ukázat naši práci.
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 15, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
+                Jako lidé, kteří zde žijí a pracují, se kolem sebe díváme s otevřenýma očima. Když vidíme problém, nečekáme, až ho vyřeší někdo jiný – sedneme si a navrhneme řešení. Projekty, které vidíte níže, jsou naší vizí v praxi. Ukazují, že máme nejen energii, ale i odborné zázemí a schopnost dotáhnout věci do konce. Že zkrátka dokážeme jednat.
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 15, fontWeight: 600, lineHeight: 1.7 }}>
+                Projděte si naše návrhy a napište nám, co na ně říkáte!
+              </p>
+            </div>
+            <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 15, fontWeight: 600, maxWidth: 520, lineHeight: 1.7 }}>
               Prohlížet projekty může každý. Pro hlasování se zaregistrujte – každý email hlasuje jednou za každý projekt.
             </p>
           </div>
