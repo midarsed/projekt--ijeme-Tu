@@ -4,6 +4,15 @@ import Link from 'next/link'
 
 const posts = [
   {
+    id: 'neonovy-beh',
+    category: 'Potkejme se',
+    title: 'Neonový běh',
+    excerpt: 'V pátek 22. května jsme si zaběhaly pro dobrou věc a zúčastnily jsme se Neon běhu s úsměvem.',
+    text: '✨ V pátek jsme si zaběhaly pro dobrou věc a zúčastnily jsme se Neon běhu s úsměvem – charitativního běhu na podporu Zdravotních klaunů 💛 Byla to krásná akce plná energie, radosti a skvělé nálady 💫\nJsme moc rády, že jsme mohly být součástí a děkujeme za úžasnou atmosféru💕',
+    image: '/potkejme%20se/neonov%C3%BD%20b%C4%9Bh/704697665_122128735161187626_6089121178362323911_n.jpg',
+    alt: 'Neonový běh'
+  },
+  {
     id: 'den-matek',
     category: 'Potkejme se',
     title: 'Den matek na zahradě sv. Martina',
@@ -52,13 +61,12 @@ export default function PotkejmeSePage() {
 
       <section style={{ padding: '72px 0' }}>
         <div className="container">
-          <div style={{ display: 'grid', justifyContent: 'flex-start', gap: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
             {posts.map((post) => (
                 <article
                   key={post.id}
                   style={{
                     width: '100%',
-                    maxWidth: 520,
                     border: '1px solid var(--border)',
                     background: 'var(--white)',
                     borderRadius: 'var(--radius)',

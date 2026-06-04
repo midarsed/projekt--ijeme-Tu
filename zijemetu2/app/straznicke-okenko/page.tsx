@@ -34,7 +34,7 @@ export default function StraznickeOkenkoPage() {
                     Říká se, že s úsměvem jde všechno líp. Někdy jsou ale věci v našem městě tak absurdní, že humor zůstává tou poslední obranou. V našem Strážnickém okénku se s nadhledem a satirou díváme na to, co ve městě (ne)funguje.
                   </p>
                   <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.7, marginBottom: 12 }}>
-                    Posvítili jsme si na zpackané investice, netransparentní rozhodování za zavřenými dveřmi i na situace, kdy vedení města s občany raději nekomunikuje vůbec. Protože věříme, že nejlepší lék na zametání problémů pod koberec je vytáhnout je na světlo světa.
+                    Posvítili jsme si na zmařené investice, netransparentní rozhodování za zavřenými dveřmi i na situace, kdy vedení města s občany raději nekomunikuje vůbec. Protože věříme, že nejlepší lék na zametání problémů pod koberec je vytáhnout je na světlo světa.
                   </p>
                   <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: 16, fontWeight: 600, lineHeight: 1.7 }}>
                     Pohodlně se usaďte a podívejte se na Strážnici z úhlu, který v oficiálním zpravodaji nenajdete.
