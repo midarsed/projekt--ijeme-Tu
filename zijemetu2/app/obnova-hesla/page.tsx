@@ -14,10 +14,12 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     const prepare = async () => {
       try {
-        // Supabase should pick up the recovery session from the URL
-        await supabase.auth.getSessionFromUrl()
+        const { data: { session } } = await supabase.auth.getSession()
+        if (!session) {
+          console.warn('No Supabase session found for password recovery flow.')
+        }
       } catch (err) {
-        console.warn('Unable to read Supabase recovery session from URL', err)
+        console.warn('Unable to read Supabase session for password recovery flow', err)
       } finally {
         setReady(true)
       }
