@@ -1,12 +1,14 @@
 'use client'
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { supabase } from './supabase'
 
 type AuthUser = { id: string; email: string; role: 'user' | 'admin' | 'team'; verified?: boolean }
 type AuthContextType = {
   user: AuthUser | null
   loading: boolean
   login: (email: string, password: string) => Promise<{ error?: string }>
-  register: (email: string, password: string) => Promise<{ error?: string }>
+  register: (email: string, password: string) => Promise<{ error?: string; message?: string }>
+  forgotPassword: (email: string) => Promise<{ error?: string; message?: string }>
   logout: () => void
 }
 
@@ -23,38 +25,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (email: string, password: string) => {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    })
-    const data = await res.json()
-    if (data.error) return { error: data.error }
-    setUser(data.user)
-    localStorage.setItem('zijemetu_user', JSON.stringify(data.user))
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) return { error: error.message }
+    if (!data?.session || !data.user) return { error: 'Přihlášení selhalo.' }
+
+    const user = {
+      id: data.user.id,
+      email: data.user.email || '',
+      role: 'user' as const,
+      verified: !!data.user.email_confirmed_at
+    }
+    setUser(user)
+    localStorage.setItem('zijemetu_user', JSON.stringify(user))
     return {}
   }
 
   const register = async (email: string, password: string) => {
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: 'https://www.zijemetustraznice.cz/vitejte'
+      }
     })
-    const data = await res.json()
-    if (data.error) return { error: data.error }
-    setUser(data.user)
-    localStorage.setItem('zijemetu_user', JSON.stringify(data.user))
-    return { message: data.message || 'Registrováno' }
+    if (error) return { error: error.message }
+    return { message: 'Registrace byla úspěšná! Zkontroluj svůj e-mail a potvrď svůj účet.' }
   }
 
-  const logout = () => {
+  const forgotPassword = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://www.zijemetustraznice.cz/obnova-hesla'
+    })
+    if (error) return { error: error.message }
+    return { message: 'Odkaz pro obnovení hesla byl odeslán na tvůj email.' }
+  }
+
+  const logout = async () => {
+    await supabase.auth.signOut()
     setUser(null)
     localStorage.removeItem('zijemetu_user')
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, forgotPassword, logout }}>
       {children}
     </AuthContext.Provider>
   )

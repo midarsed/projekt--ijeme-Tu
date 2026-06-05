@@ -11,5 +11,6 @@ export async function POST(req: NextRequest) {
   if (error || !user) return NextResponse.json({ error: 'Nesprávný email nebo heslo.' }, { status: 401 })
   const valid = await bcrypt.compare(password, user.password_hash)
   if (!valid) return NextResponse.json({ error: 'Nesprávný email nebo heslo.' }, { status: 401 })
+  if (!user.email_verified) return NextResponse.json({ error: 'Email není ověřen. Zkontrolujte email pro ověření.' }, { status: 403 })
   return NextResponse.json({ user: { id: user.id, email: user.email, role: user.role, verified: !!user.email_verified } })
 }

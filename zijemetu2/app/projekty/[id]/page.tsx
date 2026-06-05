@@ -215,53 +215,35 @@ export default function ProjectDetailPage() {
     }
 
     try {
-      const userId = String((user as any).id)
-      const alreadyVoted = userVotes.has(project.id)
-
-      if (alreadyVoted) {
-        // Zavoláme serverovou API, která používá service role key
-        const res = await fetch('/api/votes', {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ project_id: String(project.id), user_id: userId })
-        })
-
-        const data = await res.json()
-        if (!res.ok) {
-          console.error('Chyba při odstraňování hlasu (API):', data)
-          alert('Nepodařilo se odebrat hlas: ' + (data.error || res.statusText))
-          return
-        }
-
-        await refreshVotes(String(project.id), userId)
+      const sessionRes = await supabase.auth.getSession()
+      const accessToken = sessionRes.data?.session?.access_token
+      if (!accessToken) {
+        alert('Nelze ověřit váš účet. Přihlaste se prosím znovu.')
         return
       }
 
       const res = await fetch('/api/votes', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ project_id: String(project.id), user_id: userId })
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({ project_id: String(project.id) })
       })
 
       const data = await res.json()
       if (!res.ok) {
-        console.error('Chyba při přidávání hlasu (API):', data)
-        if (res.status === 409) {
-          // Otevřeme modal pro nabídku přesunu hlasu
-          setTransferOpen(true)
-          return
-        }
-
+        console.error('Chyba při hlasování (API):', data)
         const msg = String(data.error || '')
-        if (msg.includes('unique') || msg.includes('already')) {
-          alert('Pro tento projekt už jste hlasovali')
+        if (msg.includes('Email nebyl ověřen')) {
+          alert('Pro hlasování musíte ověřit svůj email. Zkontrolujte schránku a potvrďte odkaz.')
           return
         }
-        alert('Chyba při přidávání hlasu: ' + (data.error || res.statusText))
+        alert('Chyba při hlasování: ' + (data.error || res.statusText))
         return
       }
 
-      await refreshVotes(String(project.id), userId)
+      await refreshVotes(String(project.id), String((user as any).id))
     } catch (err) {
       console.error('Neočekaná chyba při hlasování:', err)
       alert('Neočekaná chyba při hlasování. Zkuste to prosím později.')

@@ -5,7 +5,7 @@ import { useAuth } from '../lib/auth-context'
 type Props = { isOpen: boolean; onClose: () => void }
 
 export default function AuthModal({ isOpen, onClose }: Props) {
-  const { login, register } = useAuth()
+  const { login, register, forgotPassword } = useAuth()
   const [mode, setMode] = useState<'login' | 'register' | 'reset'>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,6 +13,7 @@ export default function AuthModal({ isOpen, onClose }: Props) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState('')
   const [resetLink, setResetLink] = useState('')
+  const [verifyLink, setVerifyLink] = useState('')
 
   if (!isOpen) return null
 
@@ -24,19 +25,11 @@ export default function AuthModal({ isOpen, onClose }: Props) {
     if (mode !== 'reset' && password.length < 6) { setError('Heslo musí mít alespoň 6 znaků.'); setLoading(false); return }
 
     if (mode === 'reset') {
-      const res = await fetch('/api/auth/reset/request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      })
-      const data = await res.json()
+      const result = await forgotPassword(email)
       setLoading(false)
       setResetLink('')
-      if (data.error) { setError(data.error); return }
-      setSuccess(data.message || 'Zkontrolujte email pro další instrukce.')
-      if (data.resetUrl) {
-        setResetLink(data.resetUrl)
-      }
+      if (result.error) { setError(result.error); return }
+      setSuccess(result.message || 'Zkontrolujte email pro další instrukce.')
       return
     }
 
@@ -48,6 +41,10 @@ export default function AuthModal({ isOpen, onClose }: Props) {
       const msg = (result as any).message
       if (msg) {
         setSuccess(msg)
+        // show verify URL if provided (SMTP not configured)
+        if ((result as any).verifyUrl) {
+          setVerifyLink((result as any).verifyUrl)
+        }
         // keep modal open so user sees instructions
       } else {
         setSuccess('Úspěch!')
@@ -127,6 +124,12 @@ export default function AuthModal({ isOpen, onClose }: Props) {
           <div style={{ marginTop: 12, padding: '12px 14px', fontSize: 13, background: '#fff9e6', border: '1px solid #f2d591', borderRadius: 'var(--radius)' }}>
             <p style={{ margin: 0, marginBottom: 8, fontWeight: 600 }}>Odkaz pro obnovu hesla:</p>
             <a href={resetLink} style={{ color: 'var(--black)', wordBreak: 'break-all' }}>{resetLink}</a>
+          </div>
+        )}
+        {verifyLink && (
+          <div style={{ marginTop: 12, padding: '12px 14px', fontSize: 13, background: '#fff9e6', border: '1px solid #f2d591', borderRadius: 'var(--radius)' }}>
+            <p style={{ margin: 0, marginBottom: 8, fontWeight: 600 }}>Odkaz pro ověření emailu:</p>
+            <a href={verifyLink} style={{ color: 'var(--black)', wordBreak: 'break-all' }}>{verifyLink}</a>
           </div>
         )}
 

@@ -10,7 +10,7 @@ async function sendVerificationEmail(to: string, url: string) {
   const host = process.env.SMTP_HOST
   if (!host) {
     console.log('Verification URL (no SMTP configured):', url)
-    return
+    return { sent: false, url }
   }
   try {
     // @ts-ignore - optional dependency loaded only when SMTP configured
@@ -32,8 +32,10 @@ async function sendVerificationEmail(to: string, url: string) {
       text: `Klikněte na odkaz pro ověření: ${url}`,
       html: `<p>Klikněte na odkaz pro ověření emailu:</p><p><a href="${url}">${url}</a></p>`
     })
+    return { sent: true }
   } catch (e) {
     console.log('Verification URL (failed to send email):', url, e)
+    return { sent: false, url, error: String(e) }
   }
 }
 
@@ -42,12 +44,20 @@ export async function POST(req: NextRequest) {
   if (!email || !password) return NextResponse.json({ error: 'Vyplňte email a heslo.' }, { status: 400 })
   if (password.length < 6) return NextResponse.json({ error: 'Heslo musí mít alespoň 6 znaků.' }, { status: 400 })
 
-  const { data: existing } = await supabase.from('users').select('id').eq('email', email.toLowerCase()).single()
+  const { data: existing, error: existingErr } = await supabase.from('users').select('id').eq('email', email.toLowerCase()).maybeSingle()
+  if (existingErr) console.warn('Existing user check warning:', existingErr)
   if (existing) return NextResponse.json({ error: 'Tento email je již registrován.' }, { status: 409 })
 
   const password_hash = await bcrypt.hash(password, 10)
   const { data: user, error } = await supabase.from('users').insert({ email: email.toLowerCase(), password_hash, role: 'user', email_verified: false }).select().single()
-  if (error || !user) return NextResponse.json({ error: 'Chyba při registraci.' }, { status: 500 })
+  if (error || !user) {
+    const msg = error?.message || 'Chyba při registraci.'
+    console.error('Register error:', error)
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json({ error: 'Chyba při registraci.' }, { status: 500 })
+    }
+    return NextResponse.json({ error: msg }, { status: 500 })
+  }
 
   // Vytvoříme token pro ověření
   const token = crypto.randomUUID()
@@ -57,10 +67,13 @@ export async function POST(req: NextRequest) {
   const base = process.env.NEXT_PUBLIC_BASE_URL || ''
   const verifyUrl = `${base}/api/auth/verify?token=${encodeURIComponent(token)}`
   try {
-    await sendVerificationEmail(user.email, verifyUrl)
+    const emailResult = await sendVerificationEmail(user.email, verifyUrl)
+    if (emailResult && !emailResult.sent) {
+      // include verify URL in response in development or when SMTP not configured
+      return NextResponse.json({ user: { id: user.id, email: user.email, role: user.role, verified: false }, message: 'Registrováno. Zkontrolujte email pro ověření.', verifyUrl: emailResult.url })
+    }
   } catch (e) {
     console.error('Error sending verification email:', e)
   }
-
   return NextResponse.json({ user: { id: user.id, email: user.email, role: user.role, verified: false }, message: 'Registrováno. Zkontrolujte email pro ověření.' })
 }
