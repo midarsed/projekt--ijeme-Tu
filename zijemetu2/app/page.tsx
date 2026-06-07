@@ -34,7 +34,7 @@ export default function HomePage() {
                 Hlasujte o projektech, které považujete za nejdůležitější pro Strážnici. Váš hlas přímo ovlivňuje naše priority.
               </p>
 
-              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 0 }}>
+              <div className="hero-buttons" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 0 }}>
                 <Link href="/projekty" style={{ padding: '14px 32px', background: 'var(--white)', color: 'var(--black)', borderRadius: 'var(--radius)', fontWeight: 500, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none' }}>
                   Hlasovat o projektech
                 </Link>

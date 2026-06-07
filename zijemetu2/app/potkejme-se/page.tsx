@@ -20,6 +20,15 @@ const posts = [
     text: 'V neděli 10. května jsme měly možnost prezentovat naše sdružení na akci Rodinného centra pořádané ke Dni matek🌸. Rozdaly jsme spoustu dárečků, probraly s vámi naše volební vize a děti nás ohromily svými znalostmi v kvízu o místních památkách🙌. Těšíme se na další spolupráci a setkání s vámi 🤝.',
     image: '/potkejme%20se/den%20matek/att.3bhmMCb7PxiCsnfx5Y36rwsSmEd8KWwsItk6lnd3_BE.jpg',
     alt: 'Den matek na zahradě sv. Martina'
+  },
+  {
+    id: 'na-kole-detem',
+    category: 'Potkejme se',
+    title: 'Na kole dětem',
+    excerpt: 'V pátek 5. června jsme se zúčastnily úžasné charitativní jízdy „Na kole dětem" na trase Strážnice–Hodonín.',
+    text: 'V pátek 5. června jsme se zúčastnily úžasné charitativní jízdy „Na kole dětem" na trase Strážnice–Hodonín. Je neuvěřitelné, jak velkou věc dokáže vytvořit jeden člověk se skvělou myšlenkou – děkujeme, Josefe Zimovčáku!\nBylo nám potěšením zapojit se jako zástupkyně našeho sdružení a podpořit tento projekt, který pomáhá nemocným dětem. Ta energie v pelotonu a radost na tvářích byla nakažlivá. Fotka z Hodonína je důkazem, že jsme si to i přes ne příliš příznivé počasí užily!',
+    image: '/potkejme%20se/na-kole-detem/717442425_122124867531211094_3724290735527842188_n (1).jpg',
+    alt: 'Na kole dětem'
   }
 ]
 
@@ -61,7 +70,7 @@ export default function PotkejmeSePage() {
 
       <section style={{ padding: '72px 0' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(320px, 1fr))', gap: 28 }}>
             {posts.map((post) => (
                 <article
                   key={post.id}

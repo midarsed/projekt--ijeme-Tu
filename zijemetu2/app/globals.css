@@ -125,7 +125,7 @@ img { max-width: 100%; display: block; }
     width: 260px;
   }
 
-  .hero-content > div[style*="display: flex"] {
-    justify-content: center;
+  .hero-buttons {
+    justify-content: center !important;
   }
 }

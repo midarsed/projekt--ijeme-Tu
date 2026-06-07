@@ -229,7 +229,7 @@ export default function ProjektyPage() {
                     </div>
 
                     {/* Fotka */}
-                    <div style={{ position: 'relative', borderTop: '1px solid var(--border)' }}>
+                    <div style={{ position: 'relative', borderTop: '1px solid var(--border)', height: 240, overflow: 'hidden' }}>
                       {project.images && project.images.length > 0 && (
                         <img src={project.images[0]} alt={`${project.title} - fotka`}
                           onClick={(e) => {
@@ -238,8 +238,7 @@ export default function ProjektyPage() {
                           }}
                           style={{
                             width: '100%',
-                            aspectRatio: '1 / 1',
-                            height: 'auto',
+                            height: '100%',
                             objectFit: 'cover',
                             cursor: 'pointer',
                             display: 'block',
