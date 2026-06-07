@@ -129,3 +129,15 @@ img { max-width: 100%; display: block; }
     justify-content: center !important;
   }
 }
+
+.potkejme-se-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 768px) {
+  .potkejme-se-grid {
+    grid-template-columns: 1fr;
+  }
+}

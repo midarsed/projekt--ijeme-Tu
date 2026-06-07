@@ -70,7 +70,7 @@ export default function PotkejmeSePage() {
 
       <section style={{ padding: '72px 0' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(320px, 1fr))', gap: 28 }}>
+          <div className="potkejme-se-grid">
             {posts.map((post) => (
                 <article
                   key={post.id}
