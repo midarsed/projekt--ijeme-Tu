@@ -26,6 +26,11 @@ const programItems = [
     title: '6. Odpovědné vedení a dlouhodobý rozvoj',
     text: 'Město potřebuje osvícené vedení s jasným plánem rozvoje. Ten vzniká ve spolupráci s občany i odborníky a propojuje jednotlivé projekty. Díky tomu na sebe kroky navazují a vytvářejí dlouhodobě fungující celek.'
   }
+  ,
+  {
+    title: '7. Mobilita a bezpečný pohyb po městě',
+    text: 'Kvalitní veřejný prostor je základem příjemného života ve městě. Patří sem upravené parky, náměstí, ulice i místa k odpočinku, která podporují setkávání lidí, bezpečí a relaxaci. Stejně důležitý je bezpečný a bezbariérový pohyb pro chodce, rodiče s kočárky, seniory i osoby na vozíku. Díky dopravním analýzám a podnětům občanů lze odhalovat problematická místa a navrhovat lepší řešení. Město by mělo být dostupné pro všechny, s bezpečnými přechody, přehlednými křižovatkami, kvalitními chodníky, cyklostezkami i dostatečnou kapacitou parkování.'
+  }
 ]
 
 export default function FacebookPage() {
